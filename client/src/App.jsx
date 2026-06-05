@@ -38,7 +38,7 @@ const App = () => {
       <main className="container-app py-8">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/products" element={<ProductsPage search={search} />} />
+          <Route path="/products" element={<ProductsPage />} />
           <Route path="/products/:id" element={<ProductDetailsPage />} />
           <Route
             path="/wishlist"

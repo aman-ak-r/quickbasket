@@ -8,7 +8,7 @@ import ProductCard from "../components/ProductCard";
 import ProductSkeleton from "../components/ProductSkeleton";
 import { fetchCategories, fetchProducts } from "../services/productService";
 
-const ProductsPage = ({ search }) => {
+const ProductsPage = () => {
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const [categories, setCategories] = useState([]);
@@ -18,6 +18,8 @@ const ProductsPage = ({ search }) => {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [loading, setLoading] = useState(true);
+
+  const searchQuery = searchParams.get("search") || "";
 
   useEffect(() => {
     setSelectedCategory(searchParams.get("category") || "");
@@ -33,7 +35,7 @@ const ProductsPage = ({ search }) => {
       try {
         const response = await fetchProducts({
           category: selectedCategory,
-          search: searchParams.get("search") || search,
+          search: searchQuery,
           minPrice,
           maxPrice,
           sort,
@@ -45,7 +47,7 @@ const ProductsPage = ({ search }) => {
     };
 
     loadProducts();
-  }, [selectedCategory, sort, minPrice, maxPrice, search, searchParams]);
+  }, [selectedCategory, sort, minPrice, maxPrice, searchQuery]);
 
   return (
     <div className="space-y-8">
